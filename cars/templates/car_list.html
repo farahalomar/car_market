@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Car List</title>
-</head>
-<body>
+{% extends "base.html" %} 
+	{% block title  %}Car List{% endblock title %}
+
+{% block content %}
+<div class="row py-5 px-5">
 	{% for car in cars %}
-		<a href="{{car.get_absolute_url}}">
-			<h1>
+	<div class="col-12 col-md-6 col-lg-4">
+	<div class="row.no-gutters">
+			{% if car.car_img %}
+		<img class="card-img-top"src="{{car.car_img.url}}"style="width: 18rem;" />
+		{% endif %}
+			<a href="{{car.get_absolute_url}}">
+			<h1 class="card-title">
 				{{car.make}} - {{car.model}}
-				<small>
+				<small class="card-body">
 					{{car.year}}
 				</small>
 			</h1>
+				<div>
+			<div>
+				<a href="{% url 'car-detail' car_id %}">read more</a>
+  				</div>
+  			</div>
+	</div>
+	</div>
 		</a>
 		<hr>
 	{% endfor %}
-</body>
-</html>
+	</div>
+</div>
+{% endblock content %}
